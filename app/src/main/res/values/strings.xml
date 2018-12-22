@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ButtonCounter</string>
+    <string name="button">Button</string>
+    <string name="name">Name</string>
+    <string name="text">Text</string>
+    <string name="yeet">YEET</string>
+</resources>
