@@ -19,17 +19,39 @@ import com.android.volley.toolbox.Volley;
 
 public class MainActivity extends AppCompatActivity {
 
+    RequestQueue queue = Volley.newRequestQueue(this);
+    String url = "https://neat-axis-217814.appspot.com"; //SEND REQUEST SHIT ^^^^
+
     private EditText userInput;
     // private Button button; VARIABLE DECLARED LOCALLY IN LINE 23 (or so)
     private TextView textView;
     private static final String TAG = "MainActivity"; // TO USE THE TAG FUNCTIONALITY AND BEING ABLE TO USE LOG.D
     private final String TEXT_CONTENTS = "TextContents";
-
+    TextView mTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: in");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // ALL OF THIS IS TO SEND A REQUEST TO A HTTP >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        mTextView = (TextView)findViewById(R.id.textView_id);                                                  //^
+                                                                                                        //^
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,                        //^
+                new Response.Listener<String>() {                                                       //^
+                    @Override                                                                           //^
+                    public void onResponse(String response) {                                            //^
+                        mTextView.setText("Response is: " + response.substring(0, 500));                  //^
+                    }                                                                                   //^
+                }, new Response.ErrorListener() {                                                       //^
+            @Override                                                                                  //^
+            public void onErrorResponse(VolleyError error) {                                           //^
+                mTextView.setText("That didnt work!");                                                 //^
+            }                                                                                          //^
+        });                                                                                            //^
+                                                                                                       //^
+        queue.add(stringRequest);                                                                      //^
+        //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
         userInput = (EditText) findViewById(R.id.editText_id);
         Button button = (Button) findViewById(R.id.button_id);
@@ -53,43 +75,36 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: out");
     }
 
-    final TextView mTextView = (TextView) findViewById(R.id.text);
+//    final TextView mTextView = (TextView) findViewById(R.id.text);
+//
+//    // Instantiate the RequestQueue.
+//    RequestQueue queue = Volley.newRequestQueue(this);
+//    String url ="https://neat-axis-217814.appspot.com";
+//
+//    // Request a string response from the provided URL.
+//    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//            new Response.Listener<String>() {
+//                @Override
+//                public void onResponse(String response) {
+//                    // Display the first 500 characters of the response string.
+//                    mTextView.setText("Response is: "+ response.substring(0,500));
+//                }
+//            }, new Response.ErrorListener() {
+//        @Override
+//        public void onErrorResponse(VolleyError error) {
+//            mTextView.setText("That didn't work!");
+//        }
+//
+//    });
+//// Add the request to the RequestQueue.
+//    queue.add(stringRequest);
 
-    // Instantiate the RequestQueue.
-    RequestQueue queue = Volley.newRequestQueue(this);
-    String url ="https://neat-axis-217814.appspot.com";
 
-    // Request a string response from the provided URL.
-    StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-            new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    // Display the first 500 characters of the response string.
-                    mTextView.setText("Response is: "+ response.substring(0,500));
-                }
-            }, new Response.ErrorListener() {
-        @Override
-        public void onErrorResponse(VolleyError error) {
-            mTextView.setText("That didn't work!");
-        }
 
-    });
-// Add the request to the RequestQueue.
-    queue.add(stringRequest);
 
-    @Override
-    protected void onRestart() {
-        Log.d(TAG, "onRestart: in");
-        super.onRestart();
-        Log.d(TAG, "onRestart: out");
-    }
 
-    @Override
-    protected void onPause() {
-        Log.d(TAG, "onPause: in");
-        super.onPause();
-        Log.d(TAG, "onPause: out");
-    }
+
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -107,33 +122,5 @@ public class MainActivity extends AppCompatActivity {
         textView.setText(savedString);
       //  textView.setText(savedInstanceState.getString(TEXT_CONTENTS)); ^^ THIS IS THE SORT-CUT FOR THE THING ABOVE ^^
         Log.d(TAG, "onRestoreInstanceState: out");
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.d(TAG, "onDestroy: in");
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: out");
-    }
-
-    @Override
-    protected void onStop() {
-        Log.d(TAG, "onStop: in");
-        super.onStop();
-        Log.d(TAG, "onStop: out");
-    }
-
-    @Override
-    protected void onStart() {
-        Log.d(TAG, "onStart: in");
-        super.onStart();
-        Log.d(TAG, "onStart: out");
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d(TAG, "onResume: in");
-        super.onResume();
-        Log.d(TAG, "onResume: out");
     }
 }
