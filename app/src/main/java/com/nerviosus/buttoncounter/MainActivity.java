@@ -45,26 +45,12 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: out");
     }
 
-    @Override
-    protected void onRestart() {
-        Log.d(TAG, "onRestart: in");
-        super.onRestart();
-        Log.d(TAG, "onRestart: out");
-    }
-
-    @Override
-    protected void onPause() {
-        Log.d(TAG, "onPause: in");
-        super.onPause();
-        Log.d(TAG, "onPause: out");
-    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        Log.d(TAG, "onSaveInstanceState: in");
         outState.putString(TEXT_CONTENTS, textView.getText().toString()); //WE SAVE OUR DATA INSIDE THE 'OUTSTATE' BUNDLE
         super.onSaveInstanceState(outState);
-        Log.d(TAG, "onSaveInstanceState: out");
+
     }
 
     @Override
@@ -77,31 +63,4 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onRestoreInstanceState: out");
     }
 
-    @Override
-    protected void onDestroy() {
-        Log.d(TAG, "onDestroy: in");
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: out");
-    }
-
-    @Override
-    protected void onStop() {
-        Log.d(TAG, "onStop: in");
-        super.onStop();
-        Log.d(TAG, "onStop: out");
-    }
-
-    @Override
-    protected void onStart() {
-        Log.d(TAG, "onStart: in");
-        super.onStart();
-        Log.d(TAG, "onStart: out");
-    }
-
-    @Override
-    protected void onResume() {
-        Log.d(TAG, "onResume: in");
-        super.onResume();
-        Log.d(TAG, "onResume: out");
-    }
 }
